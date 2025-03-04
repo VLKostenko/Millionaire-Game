@@ -1,0 +1,36 @@
+.cta {
+  appearance: none;
+  border-radius: 12px;
+  height: 64px;
+  width: 296px;
+  border: none;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-normal);
+  line-height: 23.2px;
+  font-weight: 600;
+  background: var(--orange-100);
+  color: var(--font-color-white);
+}
+
+.cta:hover {
+  background: var(--orange-80);
+}
+
+.cta:active {
+  background: var(--orange-120);
+}
+
+@media (max-width: 1024px) {
+  .cta {
+    width: 100%;
+    max-width: 288px;
+    margin-bottom: 3em;
+  }
+}

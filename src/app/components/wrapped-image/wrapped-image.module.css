@@ -1,0 +1,11 @@
+.image_wrapper {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1024px) {
+  .image_wrapper {
+    width: 288px;
+  }
+}

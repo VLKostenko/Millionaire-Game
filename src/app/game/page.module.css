@@ -1,0 +1,41 @@
+.extend_desktop {
+  composes: primary__h1 from '../components/paragraph-primary/paragraph-primary.module.css';
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: var(--bg-black-5);
+  font-family: var(--font-inter-sans);
+}
+
+.game__content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+
+  padding: 133px 141px 122px 80px;
+}
+
+.game__answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 80px;
+  grid-row-gap: 32px;
+}
+
+.game__h1 {
+  composes: extend_desktop;
+  font-size: var(--font-medium);
+  line-height: 37.12px;
+}
