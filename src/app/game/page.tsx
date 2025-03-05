@@ -1,7 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
-
+import { useReducer } from 'react';
 import styles from './game.module.css';
 import questions from '../questions.json';
 
@@ -9,83 +8,122 @@ import questions from '../questions.json';
 import ScoreList from '@/app/components/score-list/score-list';
 import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
 import GameCtaButton from '@/app/components/game-cta-button/game-cta-button';
+import MobileMenu from '@/app/components/mobile-menu/mobile-menu';
 
-interface QuizQuestion {
-  id: number;
-  question: string;
-  answers: {
-    A: string;
-    B: string;
-    C: string;
-    D: string;
-  };
-  correct: string | string[];
-}
+// Hooks
+import useMediaQuery from '@/app/hooks/useMediaQuery';
 
-interface QuizData {
-  questions: QuizQuestion[];
-}
+// Interfaces
+import {
+  QuizAction,
+  QuizData,
+  QuizQuestion,
+  QuizState,
+} from '@/app/game/interfaces';
 
 const quizData: QuizData = questions;
 
+const initialState: QuizState = {
+  currentQuestionIndex: 0,
+  selectedAnswers: [],
+  isAnswered: false,
+  isQuizCompleted: false,
+};
+
+function quizReducer(state: QuizState, action: QuizAction): QuizState {
+  switch (action.type) {
+    case 'SELECT_ANSWER':
+      if (state.isAnswered) return state;
+      return {
+        ...state,
+        selectedAnswers: state.selectedAnswers.includes(action.payload)
+          ? state.selectedAnswers.filter((ans) => ans !== action.payload)
+          : [...state.selectedAnswers, action.payload],
+      };
+    case 'CHECK_ANSWER':
+      return { ...state, isAnswered: true };
+    case 'NEXT_QUESTION':
+      if (state.currentQuestionIndex < quizData.questions.length - 1) {
+        return {
+          ...state,
+          currentQuestionIndex: state.currentQuestionIndex + 1,
+          selectedAnswers: [],
+          isAnswered: false,
+        };
+      } else {
+        return { ...state, isQuizCompleted: true };
+      }
+    default:
+      return state;
+  }
+}
+
 export default function Game() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const isMobile = useMediaQuery('(max-width: 1024px)');
 
-  const question: QuizQuestion = quizData.questions[currentQuestionIndex];
+  const [state, dispatch] = useReducer(quizReducer, initialState);
 
-  const handleAnswerClick = useCallback((answerKey: string) => {
-    const correctAnswers = Array.isArray(question.correct)
-      ? question.correct
-      : [question.correct];
+  const question: QuizQuestion = quizData.questions[state.currentQuestionIndex];
+  const correctAnswers: string[] = Array.isArray(question.correct)
+    ? question.correct
+    : [question.correct];
+  const requiredCorrectAnswers = correctAnswers.length;
 
-    const isAnswerCorrect = correctAnswers.includes(answerKey);
-    setSelectedAnswer(answerKey);
-    setIsCorrect(isAnswerCorrect);
-  }, []);
-
-  const handleNextQuestion = () => {
-    if (currentQuestionIndex < quizData.questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setSelectedAnswer(null);
-      setIsCorrect(null);
-    } else {
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer(null);
-      setIsCorrect(null);
-    }
-  };
+  const isCorrect: boolean =
+    state.selectedAnswers.length > 0 &&
+    state.selectedAnswers.every((ans) => correctAnswers.includes(ans)) &&
+    correctAnswers.length === state.selectedAnswers.length;
 
   return (
     <main className={styles.game}>
+      {isMobile && <MobileMenu isCorrect={isCorrect} />}
+
       <div className={styles.game__content}>
         <BaseParagraph style={styles.game__h1} title={question.question} />
 
+        {state.isQuizCompleted && <h2>Quiz Completed! 🎉</h2>}
+
         <div className={styles.game__answers_container}>
+          <BaseParagraph
+            style={styles.game__h3}
+            title={`Select ${requiredCorrectAnswers} correct answer(s)`}
+          />
+
           <div className={styles.game__answers}>
             {Object.entries(question.answers).map(([key, value]) => (
               <GameCtaButton
+                state={state}
+                id={key}
+                correctAnswers={correctAnswers}
                 symbol={key}
                 title={value}
                 key={key}
-                onClick={() => handleAnswerClick(key)}
+                onClick={() =>
+                  dispatch({ type: 'SELECT_ANSWER', payload: key })
+                }
               />
             ))}
           </div>
 
-          <button
-            onClick={handleNextQuestion}
-            className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-          >
-            Next Question
-          </button>
-
-          {selectedAnswer && <p>{isCorrect ? 'Correct!' : 'Incorrect!'}</p>}
+          {!state.isAnswered ? (
+            <button
+              onClick={() => dispatch({ type: 'CHECK_ANSWER' })}
+              disabled={state.selectedAnswers.length === 0}
+            >
+              Submit Answer
+            </button>
+          ) : (
+            <>
+              <p>{isCorrect ? 'Correct!' : 'Incorrect!'}</p>
+              <button onClick={() => dispatch({ type: 'NEXT_QUESTION' })}>
+                Next Question
+              </button>
+            </>
+          )}
         </div>
       </div>
 
-      <ScoreList isCorrect={isCorrect} />
+      {!isMobile && <ScoreList isCorrect={isCorrect} />}
     </main>
   );
 }

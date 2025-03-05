@@ -14,9 +14,9 @@ export default function BaseParagraph({
   spanStyle,
 }: ParagraphPrimaryProps) {
   return (
-    <div>
+    <>
       {spanTitle && <span className={spanStyle}>{spanTitle}</span>}
       <h1 className={style}>{title}</h1>
-    </div>
+    </>
   );
 }

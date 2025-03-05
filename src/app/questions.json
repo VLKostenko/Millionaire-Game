@@ -31,7 +31,7 @@
         "C": "Vancouver",
         "D": "Montreal"
       },
-      "correct": ["B", "A"]
+      "correct": ["A", "B"]
     },
     {
       "id": 4,

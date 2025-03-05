@@ -10,6 +10,14 @@
   justify-items: center;
   justify-content: center;
   background-color: var(--bg-white);
-  font-family: var(--font-inter-sans);
   overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+  .score_section {
+    background-color: var(--black-5);
+    max-width: 100%;
+    justify-content: flex-end;
+    padding-bottom: 32px;
+  }
 }

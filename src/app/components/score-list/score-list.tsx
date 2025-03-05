@@ -1,29 +1,22 @@
-'use client';
-
 import React from 'react';
 import styles from './score-list.module.css';
-import score from '../../score.json';
+import scoreData from '../../score.json';
 
 // Components
 import ScoreItem from '@/app/components/score-item/score-item';
 
-interface CorrectAnswer {
+interface ScoreItem {
+  id: string;
+  amount: string;
+}
+
+interface ScoreListProps {
   isCorrect: boolean | null;
 }
-// interface ScoreItem {
-//   id: string;
-//   amount: string;
-// }
 
-// interface CorrectAnswer extends ScoreItem {
-//   isCorrect: boolean | null;
-// }
+const score: ScoreItem[] = scoreData;
 
-// interface ScoreListProps {
-//   scores: (ScoreItem | CorrectAnswer)[];
-// }
-
-export default function ScoreList({ isCorrect }: CorrectAnswer) {
+export default function ScoreList({ isCorrect }: ScoreListProps) {
   return (
     <section className={styles.score_section}>
       {score.map(({ id, amount }) => {

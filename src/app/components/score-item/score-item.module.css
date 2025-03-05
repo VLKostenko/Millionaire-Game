@@ -34,7 +34,7 @@
   transition:
     background 0.2s,
     color 0.2s,
-    border-color 0.2s;
+    all 0.2s;
   border: 1px solid var(--black-40);
   transform: translateY(-50%) rotate(-45deg);
 }
@@ -86,4 +86,10 @@
 
 .inactive {
   color: var(--black-40);
+}
+
+@media (max-width: 1024px) {
+  .score_button {
+    max-width: calc(100% - 50px);
+  }
 }
