@@ -7,7 +7,7 @@ interface ParagraphPrimaryProps {
   spanStyle?: string;
 }
 
-export default function ParagraphPrimary({
+export default function BaseParagraph({
   title,
   spanTitle,
   style,

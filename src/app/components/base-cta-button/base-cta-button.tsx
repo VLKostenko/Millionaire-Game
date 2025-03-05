@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './cta-button-primary.module.css';
+import styles from './base-cta-button.module.css';
 import Link from 'next/link';
 
 interface CtaButtonPrimaryProps {
@@ -7,12 +7,12 @@ interface CtaButtonPrimaryProps {
   url: string;
 }
 
-export default function CtaButtonPrimary({
+export default function BaseCtaButton({
   children,
   url,
 }: CtaButtonPrimaryProps) {
   return (
-    <Link href={url} className={styles.cta}>
+    <Link href={url} className={styles.base_cta_button}>
       {children}
     </Link>
   );

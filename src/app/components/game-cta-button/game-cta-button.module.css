@@ -1,0 +1,30 @@
+.extend_score_item {
+  composes: score_button from '../../components/score-item/score-item.module.css';
+}
+
+.extend_score_item__text {
+  composes: score_button__text from '../../components/score-item/score-item.module.css';
+}
+
+.game_cta_button {
+  width: 100%;
+  justify-content: flex-start;
+  max-width: 389px;
+  padding: 24px 39px 24px 32px;
+  composes: extend_score_item;
+}
+
+.game_cta_span {
+  margin-right: 8px;
+  color: var(--orange-100);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.game_cta_button__text {
+  composes: extend_score_item__text;
+}
+
+.inactive {
+  color: var(--black-40);
+}

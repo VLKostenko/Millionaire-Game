@@ -2,13 +2,13 @@
 
 import { useCallback, useState } from 'react';
 
-import styles from './page.module.css';
+import styles from './game.module.css';
 import questions from '../questions.json';
-import score from '../score.json';
 
+// Components
 import ScoreList from '@/app/components/score-list/score-list';
-import ParagraphPrimary from '@/app/components/paragraph-primary/paragraph-primary';
-import CtaButtonSecondary from '@/app/components/cta-button-secondary/cta-button-secondary';
+import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
+import GameCtaButton from '@/app/components/game-cta-button/game-cta-button';
 
 interface QuizQuestion {
   id: number;
@@ -60,12 +60,12 @@ export default function Game() {
   return (
     <main className={styles.game}>
       <div className={styles.game__content}>
-        <ParagraphPrimary style={styles.game__h1} title={question.question} />
+        <BaseParagraph style={styles.game__h1} title={question.question} />
 
-        <div>
+        <div className={styles.game__answers_container}>
           <div className={styles.game__answers}>
             {Object.entries(question.answers).map(([key, value]) => (
-              <CtaButtonSecondary
+              <GameCtaButton
                 symbol={key}
                 title={value}
                 key={key}
@@ -73,6 +73,7 @@ export default function Game() {
               />
             ))}
           </div>
+
           <button
             onClick={handleNextQuestion}
             className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
@@ -84,7 +85,7 @@ export default function Game() {
         </div>
       </div>
 
-      <ScoreList scores={score} isCorrect={isCorrect} />
+      <ScoreList isCorrect={isCorrect} />
     </main>
   );
 }

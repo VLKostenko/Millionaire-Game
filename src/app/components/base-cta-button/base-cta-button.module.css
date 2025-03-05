@@ -1,4 +1,4 @@
-.cta {
+.base_cta_button {
   appearance: none;
   border-radius: 12px;
   height: 64px;
@@ -19,16 +19,16 @@
   color: var(--font-color-white);
 }
 
-.cta:hover {
+.base_cta_button:hover {
   background: var(--orange-80);
 }
 
-.cta:active {
+.base_cta_button:active {
   background: var(--orange-120);
 }
 
 @media (max-width: 1024px) {
-  .cta {
+  .base_cta_button {
     width: 100%;
     max-width: 288px;
     margin-bottom: 3em;

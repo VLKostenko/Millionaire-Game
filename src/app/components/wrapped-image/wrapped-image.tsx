@@ -16,7 +16,7 @@ export default function WrappedImage({
   width,
   height,
   layout,
-}: React.FC<WrappedImageProps>) {
+}: WrappedImageProps) {
   return (
     <div className={styles.image_wrapper}>
       <Image

@@ -2,36 +2,33 @@
 
 import React from 'react';
 import styles from './score-list.module.css';
-import CtaButtonSecondary from '@/app/components/cta-button-secondary/cta-button-secondary';
+import score from '../../score.json';
 
-interface ScoreItem {
-  id: string;
-  amount: string;
-}
+// Components
+import ScoreItem from '@/app/components/score-item/score-item';
 
-interface CorrectAnswer extends ScoreItem {
+interface CorrectAnswer {
   isCorrect: boolean | null;
 }
+// interface ScoreItem {
+//   id: string;
+//   amount: string;
+// }
 
-interface ScoreListProps {
-  scores: (ScoreItem | CorrectAnswer)[];
-}
+// interface CorrectAnswer extends ScoreItem {
+//   isCorrect: boolean | null;
+// }
 
-const ScoreList: React.FC<ScoreListProps> = ({ isCorrect, scores }) => {
+// interface ScoreListProps {
+//   scores: (ScoreItem | CorrectAnswer)[];
+// }
+
+export default function ScoreList({ isCorrect }: CorrectAnswer) {
   return (
     <section className={styles.score_section}>
-      {scores.map(({ id, amount }) => {
-        return (
-          <CtaButtonSecondary
-            symbol={'$'}
-            title={amount}
-            key={id}
-            isCorrect={isCorrect}
-          />
-        );
+      {score.map(({ id, amount }) => {
+        return <ScoreItem key={id} title={amount} isCorrect={isCorrect} />;
       })}
     </section>
   );
-};
-
-export default ScoreList;
+}

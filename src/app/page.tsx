@@ -1,9 +1,9 @@
 import styles from './page.module.css';
 
 // Components
-import CtaButtonPrimary from '@/app/components/cta-button-primary/cta-button-primary';
+import BaseCtaButton from '@/app/components/base-cta-button/base-cta-button';
 import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
-import ParagraphPrimary from '@/app/components/paragraph-primary/paragraph-primary';
+import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
 
 export default function Home() {
   return (
@@ -20,18 +20,18 @@ export default function Home() {
             layout={'intrinsic'}
           />
 
-          <ParagraphPrimary
+          <BaseParagraph
             style={styles.extend_mobile}
             title={'Who wants to be a millionaire?'}
           />
         </div>
 
         <div className={'content_container'}>
-          <ParagraphPrimary
+          <BaseParagraph
             style={styles.extend_desktop}
             title={'Who wants to be a millionaire?'}
           />
-          <CtaButtonPrimary url={'/game'}>Start</CtaButtonPrimary>
+          <BaseCtaButton url={'/game'}>Start</BaseCtaButton>
         </div>
       </div>
     </main>

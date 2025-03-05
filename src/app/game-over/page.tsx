@@ -1,9 +1,9 @@
-import styles from './page.module.css';
+import styles from './game-over.module.css';
 
 // Components
 import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
-import CtaButtonPrimary from '@/app/components/cta-button-primary/cta-button-primary';
-import ParagraphPrimary from '@/app/components/paragraph-primary/paragraph-primary';
+import BaseCtaButton from '@/app/components/base-cta-button/base-cta-button';
+import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
 
 export default function GameOver() {
   return (
@@ -18,7 +18,7 @@ export default function GameOver() {
             layout={'intrinsic'}
           />
 
-          <ParagraphPrimary
+          <BaseParagraph
             spanStyle={styles.extend_mobile__span}
             spanTitle={'Total score:'}
             style={styles.extend_mobile}
@@ -27,13 +27,13 @@ export default function GameOver() {
         </div>
 
         <div className={'content_container'}>
-          <ParagraphPrimary
+          <BaseParagraph
             spanStyle={styles.extend_desktop__span}
             spanTitle={'Total score:'}
             style={styles.extend_desktop}
             title={'$8,000 earned'}
           />
-          <CtaButtonPrimary url={'/'}>Try again</CtaButtonPrimary>
+          <BaseCtaButton url={'/'}>Try again</BaseCtaButton>
         </div>
       </div>
     </main>
