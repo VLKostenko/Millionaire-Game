@@ -1,11 +1,31 @@
+'use client';
+
 import styles from './game-over.module.css';
+import { useRouter } from 'next/navigation';
 
 // Components
 import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
-import BaseCtaButton from '@/app/components/base-cta-button/base-cta-button';
 import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
+import CtaButton from '@/app/components/cta-button.tsx/cta-button';
+
+// Context
+import { useFinalScore } from '@/app/context/FinalScoreContext';
 
 export default function GameOver() {
+  const router = useRouter();
+  const { amount, setNewAmount } = useFinalScore();
+
+  const handleRedirect = () => {
+    router.push('/');
+
+    const timerId = setTimeout(() => {
+      // Set score to 0 for new game
+      setNewAmount('0');
+    }, 500);
+
+    return () => clearTimeout(timerId);
+  };
+
   return (
     <main className={styles.game_over}>
       <div className={styles.game_over__content}>
@@ -22,7 +42,7 @@ export default function GameOver() {
             spanStyle={styles.extend_mobile__span}
             spanTitle={'Total score:'}
             style={styles.extend_mobile}
-            title={'$8,000 earned'}
+            title={`$ ${amount ? amount : '0'} earned`}
           />
         </div>
 
@@ -31,9 +51,9 @@ export default function GameOver() {
             spanStyle={styles.extend_desktop__span}
             spanTitle={'Total score:'}
             style={styles.extend_desktop}
-            title={'$8,000 earned'}
+            title={`$ ${amount ? amount : '0'} earned`}
           />
-          <BaseCtaButton url={'/'}>Try again</BaseCtaButton>
+          <CtaButton handleClick={handleRedirect}>Try again</CtaButton>
         </div>
       </div>
     </main>

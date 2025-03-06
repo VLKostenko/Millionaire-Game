@@ -4,6 +4,12 @@ import styles from './page.module.css';
 import BaseCtaButton from '@/app/components/base-cta-button/base-cta-button';
 import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
 import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Millionaire Game - Home Page',
+  description: 'Game who wants to be a millionaire',
+};
 
 export default function Home() {
   return (

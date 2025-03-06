@@ -3,13 +3,15 @@
 import React from 'react';
 import { useState } from 'react';
 import styles from './mobile-menu.module.css';
+
+// Components
 import ScoreList from '@/app/components/score-list/score-list';
 
 interface MobileMenuProps {
-  isCorrect: boolean | null;
+  currentIndex: number;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ isCorrect }) => {
+const MobileMenu: React.FC<MobileMenuProps> = ({ currentIndex }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
@@ -73,7 +75,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isCorrect }) => {
         )}
       </button>
       <nav className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
-        <ScoreList isCorrect={isCorrect} />
+        <ScoreList currentIndex={currentIndex} />
       </nav>
     </>
   );

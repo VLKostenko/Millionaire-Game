@@ -1,26 +1,45 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
 import styles from './score-list.module.css';
 import scoreData from '../../score.json';
 
 // Components
 import ScoreItem from '@/app/components/score-item/score-item';
 
-interface ScoreItem {
-  id: string;
-  amount: string;
-}
+// Context
+import { useFinalScore } from '@/app/context/FinalScoreContext';
 
-interface ScoreListProps {
-  isCorrect: boolean | null;
-}
+// Hooks
+import { updateAmountBasedOnIndex } from '@/app/hooks/utils/updateAmoutBasedOnIndex';
 
-const score: ScoreItem[] = scoreData;
+// Interfaces
+import {
+  ScoreListProps,
+  ScoreItemProps,
+} from '@/app/components/score-list/interfaces';
 
-export default function ScoreList({ isCorrect }: ScoreListProps) {
+const score: ScoreItemProps[] = scoreData;
+
+export default function ScoreList({ currentIndex }: ScoreListProps) {
+  const { setNewAmount } = useFinalScore();
+
+  useEffect(() => {
+    // set actual score to context
+    updateAmountBasedOnIndex(score, currentIndex, setNewAmount);
+  }, [score, currentIndex]);
+
   return (
     <section className={styles.score_section}>
-      {score.map(({ id, amount }) => {
-        return <ScoreItem key={id} title={amount} isCorrect={isCorrect} />;
+      {score.map((scoreItem, index) => {
+        return (
+          <ScoreItem
+            key={index}
+            id={scoreItem.id}
+            title={scoreItem.amount}
+            currentIndex={currentIndex}
+          />
+        );
       })}
     </section>
   );

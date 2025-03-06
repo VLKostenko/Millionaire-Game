@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './style/globals.css';
+import { FinalScoreProvider } from '@/app/context/FinalScoreContext';
 
 const inter = Inter({
   variable: '--font-inter-sans',
@@ -22,7 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}`}>{children}</body>
+      <body className={`${inter.variable}`}>
+        <FinalScoreProvider>{children}</FinalScoreProvider>
+      </body>
     </html>
   );
 }

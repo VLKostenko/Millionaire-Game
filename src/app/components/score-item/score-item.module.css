@@ -84,8 +84,35 @@
   background: var(--orange-100);
 }
 
-.inactive {
+/* Active State for button  */
+.active_button,
+.active_button::before,
+.active_button::after {
+  border-color: var(--orange-100);
+}
+
+.inactive_button,
+.active_button::before,
+.active_button::after {
+  color: var(--black-5);
+}
+
+/* Active style for text and horizontal line*/
+.inactive_text {
   color: var(--black-40);
+}
+
+.active_text {
+  color: var(--orange-100);
+}
+
+.active_text::before,
+.active_text::after {
+  background: var(--orange-100);
+}
+
+.default_text {
+  color: var(--black-100);
 }
 
 @media (max-width: 1024px) {

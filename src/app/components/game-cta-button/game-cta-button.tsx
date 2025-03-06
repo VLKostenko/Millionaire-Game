@@ -21,37 +21,34 @@ export default function GameCtaButton({
   id,
   correctAnswers,
 }: GameCtaButtonProps) {
+  const isSelected = state.selectedAnswers.includes(id);
+  const isAnswered = state.isAnswered;
+  const isCorrect = correctAnswers.includes(id);
+
+  const buttonClass = `${styles.game_cta_button} ${
+    isAnswered && isSelected
+      ? isCorrect
+        ? styles.correct
+        : styles.wrong
+      : isSelected
+        ? styles.selected
+        : ''
+  }`;
+
+  const textClass = `${styles.game_cta_button__text} ${
+    isAnswered && isSelected
+      ? isCorrect
+        ? styles.text_correct
+        : styles.text_wrong
+      : isSelected
+        ? styles.text_selected
+        : ''
+  }`;
+
   return (
-    <div
-      className={`
-      ${styles.game_cta_button}
-      ${
-        state.isAnswered && state.selectedAnswers.includes(id)
-          ? correctAnswers.includes(id)
-            ? styles.correct
-            : styles.wrong
-          : state.selectedAnswers.includes(id)
-            ? styles.selected
-            : ''
-      }`}
-      onClick={() => onClick(symbol)}
-    >
+    <div className={buttonClass} onClick={() => onClick(symbol)}>
       {symbol && <span className={styles.game_cta_span}>{symbol}</span>}
-      <p
-        className={`
-        ${styles.game_cta_button__text}
-        ${
-          state.isAnswered && state.selectedAnswers.includes(id)
-            ? correctAnswers.includes(id)
-              ? styles.text_correct
-              : styles.text_wrong
-            : state.selectedAnswers.includes(id)
-              ? styles.text_selected
-              : ''
-        }`}
-      >
-        {title}
-      </p>
+      <p className={textClass}>{title}</p>
     </div>
   );
 }

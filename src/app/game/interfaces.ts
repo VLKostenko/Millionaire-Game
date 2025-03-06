@@ -10,6 +10,11 @@ export interface QuizQuestion {
   correct: string | string[];
 }
 
+export interface ScoreInterface {
+  id: number;
+  amount: string;
+}
+
 export interface QuizData {
   questions: QuizQuestion[];
 }
