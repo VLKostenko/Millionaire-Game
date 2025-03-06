@@ -1,7 +1,3 @@
-.extend_desktop {
-  composes: primary__h1 from '../components/base-paragraph/base-paragraph.module.css';
-}
-
 .game {
   display: flex;
   flex-direction: row;
@@ -40,9 +36,15 @@
 }
 
 .game__h1 {
-  composes: extend_desktop;
+  font-weight: 600;
+  color: var(--black-100);
   font-size: var(--font-medium);
   line-height: 37.12px;
+}
+
+.game__h2 {
+  composes: game__h1;
+  margin-bottom: 80px;
 }
 
 .game__h3 {
@@ -70,5 +72,9 @@
     font-size: var(--font-sm);
     text-align: center;
     margin-bottom: 0;
+  }
+
+  .game__h3 {
+    margin-bottom: 20px;
   }
 }

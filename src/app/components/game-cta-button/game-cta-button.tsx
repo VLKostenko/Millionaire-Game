@@ -6,7 +6,6 @@ import { QuizState } from '@/app/game/interfaces';
 interface GameCtaButtonProps {
   title: string | number;
   style?: string;
-  // isCorrect?: boolean;
   onClick: (key: string) => void;
   symbol: string;
   id: string;
