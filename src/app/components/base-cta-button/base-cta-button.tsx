@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './base-cta-button.module.css';
-import Link from 'next/link';
+import React from 'react'
+import styles from './base-cta-button.module.css'
+import Link from 'next/link'
 
 interface CtaButtonPrimaryProps {
-  children: React.ReactNode;
-  url: string;
+  children: React.ReactNode
+  url: string
 }
 
 export default function BaseCtaButton({
@@ -15,5 +15,5 @@ export default function BaseCtaButton({
     <Link href={url} className={styles.base_cta_button}>
       {children}
     </Link>
-  );
+  )
 }

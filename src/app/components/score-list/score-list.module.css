@@ -18,6 +18,13 @@
     background-color: var(--black-5);
     max-width: 100%;
     justify-content: flex-end;
-    padding-bottom: 32px;
+    padding-bottom: 60px;
+  }
+}
+
+@media (max-width: 380px) {
+  .score_section {
+    padding-top: 50px;
+    padding-bottom: 20px;
   }
 }

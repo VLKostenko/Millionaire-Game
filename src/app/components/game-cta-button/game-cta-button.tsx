@@ -1,16 +1,16 @@
-import styles from './game-cta-button.module.css';
+import styles from './game-cta-button.module.css'
 
 // Interfaces
-import { QuizState } from '@/app/game/interfaces';
+import { QuizState } from '@/app/game/interfaces'
 
 interface GameCtaButtonProps {
-  title: string | number;
-  style?: string;
-  onClick: (key: string) => void;
-  symbol: string;
-  id: string;
-  state: QuizState;
-  correctAnswers: string[];
+  title: string | number
+  style?: string
+  onClick: (key: string) => void
+  symbol: string
+  id: string
+  state: QuizState
+  correctAnswers: string[]
 }
 
 export default function GameCtaButton({
@@ -21,9 +21,9 @@ export default function GameCtaButton({
   id,
   correctAnswers,
 }: GameCtaButtonProps) {
-  const isSelected = state.selectedAnswers.includes(id);
-  const isAnswered = state.isAnswered;
-  const isCorrect = correctAnswers.includes(id);
+  const isSelected = state.selectedAnswers.includes(id)
+  const isAnswered = state.isAnswered
+  const isCorrect = correctAnswers.includes(id)
 
   const buttonClass = `${styles.game_cta_button} ${
     isAnswered && isSelected
@@ -33,7 +33,7 @@ export default function GameCtaButton({
       : isSelected
         ? styles.selected
         : ''
-  }`;
+  }`
 
   const textClass = `${styles.game_cta_button__text} ${
     isAnswered && isSelected
@@ -43,12 +43,12 @@ export default function GameCtaButton({
       : isSelected
         ? styles.text_selected
         : ''
-  }`;
+  }`
 
   return (
     <div className={buttonClass} onClick={() => onClick(symbol)}>
       {symbol && <span className={styles.game_cta_span}>{symbol}</span>}
       <p className={textClass}>{title}</p>
     </div>
-  );
+  )
 }

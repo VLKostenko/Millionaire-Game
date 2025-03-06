@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useReducer } from 'react';
-import styles from '@/app/game/game.module.css';
+import React, { useMemo } from 'react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useReducer } from 'react'
+import styles from '@/app/game/game.module.css'
 
 // Data
-import questions from '@/app/questions.json';
-import score from '@/app/score.json';
+import questions from '@/app/questions.json'
+import score from '@/app/score.json'
 
 // Components
-import GameCtaButton from '@/app/components/game-cta-button/game-cta-button';
-import MobileMenu from '@/app/components/mobile-menu/mobile-menu';
-import ScoreList from '@/app/components/score-list/score-list';
+import GameCtaButton from '@/app/components/game-cta-button/game-cta-button'
+import MobileMenu from '@/app/components/mobile-menu/mobile-menu'
+import ScoreList from '@/app/components/score-list/score-list'
 
 // Hooks
-import useMediaQuery from '@/app/hooks/ui/useMediaQuery';
-import { useFinalScore } from '@/app/context/FinalScoreContext';
+import useMediaQuery from '@/app/hooks/ui/useMediaQuery'
+import { useFinalScore } from '@/app/context/FinalScoreContext'
 
 // Interfaces
 import {
@@ -25,30 +25,30 @@ import {
   QuizQuestion,
   QuizState,
   ScoreInterface,
-} from '@/app/game/interfaces';
+} from '@/app/game/interfaces'
 
-const quizData: QuizData = questions;
-const scoreData: ScoreInterface[] = score;
+const quizData: QuizData = questions
+const scoreData: ScoreInterface[] = score
 
 const initialState: QuizState = {
   currentQuestionIndex: 0,
   selectedAnswers: [],
   isAnswered: false,
   isQuizCompleted: false,
-};
+}
 
 function quizReducer(state: QuizState, action: QuizAction): QuizState {
   switch (action.type) {
     case 'SELECT_ANSWER':
-      if (state.isAnswered) return state;
+      if (state.isAnswered) return state
       return {
         ...state,
         selectedAnswers: state.selectedAnswers.includes(action.payload)
           ? state.selectedAnswers.filter((ans) => ans !== action.payload)
           : [...state.selectedAnswers, action.payload],
-      };
+      }
     case 'CHECK_ANSWER':
-      return { ...state, isAnswered: true };
+      return { ...state, isAnswered: true }
     case 'NEXT_QUESTION':
       if (state.currentQuestionIndex < quizData.questions.length - 1) {
         return {
@@ -56,71 +56,77 @@ function quizReducer(state: QuizState, action: QuizAction): QuizState {
           currentQuestionIndex: state.currentQuestionIndex + 1,
           selectedAnswers: [],
           isAnswered: false,
-        };
+        }
       } else {
-        return { ...state, isQuizCompleted: true };
+        return { ...state, isQuizCompleted: true }
       }
     default:
-      return state;
+      return state
   }
 }
 
-export default function GameQuestions() {
-  const { setNewAmount } = useFinalScore();
-  const router = useRouter();
-  const isMobile = useMediaQuery('(max-width: 1024px)');
-  const [state, dispatch] = useReducer(quizReducer, initialState);
+const GameQuestions: React.FC = () => {
+  const { setNewAmount } = useFinalScore()
+  const router = useRouter()
+  const isMobile = useMediaQuery('(max-width: 1024px)')
+  const [state, dispatch] = useReducer(quizReducer, initialState)
 
-  const question: QuizQuestion = quizData.questions[state.currentQuestionIndex];
+  const question: QuizQuestion = useMemo(
+    () => quizData.questions[state.currentQuestionIndex],
+    [state.currentQuestionIndex]
+  )
 
-  const correctAnswers: string[] = Array.isArray(question.correct)
-    ? question.correct
-    : [question.correct];
-  const requiredCorrectAnswers = correctAnswers.length;
+  const correctAnswers: string[] = useMemo(
+    () =>
+      Array.isArray(question.correct) ? question.correct : [question.correct],
+    [question]
+  )
+
+  const requiredCorrectAnswers = correctAnswers.length
 
   const isCorrect: boolean =
     state.selectedAnswers.length > 0 &&
     state.selectedAnswers.every((ans) => correctAnswers.includes(ans)) &&
-    correctAnswers.length === state.selectedAnswers.length;
+    correctAnswers.length === state.selectedAnswers.length
 
   // Check for another steps
   useEffect(() => {
-    if (state.selectedAnswers.length === 0) return;
+    if (state.selectedAnswers.length === 0) return
 
     const checkAnswerTimer = setTimeout(() => {
-      dispatch({ type: 'CHECK_ANSWER' });
+      dispatch({ type: 'CHECK_ANSWER' })
 
       const nextStepTimer = setTimeout(() => {
         if (isCorrect) {
-          dispatch({ type: 'NEXT_QUESTION' });
+          dispatch({ type: 'NEXT_QUESTION' })
         } else {
-          router.push('/game-over');
+          router.push('/game-over')
         }
-      }, 2000);
+      }, 2000)
 
       // Clean up the second timeout
-      return () => clearTimeout(nextStepTimer);
-    }, 2000);
+      return () => clearTimeout(nextStepTimer)
+    }, 2000)
 
     // Clean up the first timeout
-    return () => clearTimeout(checkAnswerTimer);
-  }, [state.selectedAnswers, isCorrect, router]);
+    return () => clearTimeout(checkAnswerTimer)
+  }, [state.selectedAnswers, isCorrect, router])
 
   // After quiz completed redirect to Game Over page
   useEffect(() => {
-    const lastScore = scoreData[0];
+    const lastScore = scoreData[0]
 
     if (state.isQuizCompleted) {
       const timeoutId = setTimeout(() => {
         // we protect ourselves in case of winning
-        setNewAmount(lastScore.amount);
-        router.push('/game-over');
-      }, 2000);
+        setNewAmount(lastScore.amount)
+        router.push('/game-over')
+      }, 2000)
 
       // Cleanup timeout on component unmount or before rerunning effect
-      return () => clearTimeout(timeoutId);
+      return () => clearTimeout(timeoutId)
     }
-  }, [state.isQuizCompleted, router]);
+  }, [state.isQuizCompleted, router])
 
   return (
     <>
@@ -158,5 +164,7 @@ export default function GameQuestions() {
 
       {!isMobile && <ScoreList currentIndex={state.currentQuestionIndex} />}
     </>
-  );
+  )
 }
+
+export default GameQuestions

@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import React, { useEffect } from 'react';
-import styles from './score-list.module.css';
-import scoreData from '../../score.json';
+import React, { useEffect } from 'react'
+import styles from './score-list.module.css'
+import scoreData from '../../score.json'
 
 // Components
-import ScoreItem from '@/app/components/score-item/score-item';
+import ScoreItem from '@/app/components/score-item/score-item'
 
 // Context
-import { useFinalScore } from '@/app/context/FinalScoreContext';
+import { useFinalScore } from '@/app/context/FinalScoreContext'
 
 // Hooks
-import { updateAmountBasedOnIndex } from '@/app/hooks/utils/updateAmoutBasedOnIndex';
+import { updateAmountBasedOnIndex } from '@/app/hooks/utils/updateAmoutBasedOnIndex'
 
 // Interfaces
 import {
   ScoreListProps,
   ScoreItemProps,
-} from '@/app/components/score-list/interfaces';
+} from '@/app/components/score-list/interfaces'
 
-const score: ScoreItemProps[] = scoreData;
+const score: ScoreItemProps[] = scoreData
 
 export default function ScoreList({ currentIndex }: ScoreListProps) {
-  const { setNewAmount } = useFinalScore();
+  const { setNewAmount } = useFinalScore()
 
   useEffect(() => {
     // set actual score to context
-    updateAmountBasedOnIndex(score, currentIndex, setNewAmount);
-  }, [score, currentIndex]);
+    updateAmountBasedOnIndex(score, currentIndex, setNewAmount)
+  }, [score, currentIndex])
 
   return (
     <section className={styles.score_section}>
@@ -39,8 +39,8 @@ export default function ScoreList({ currentIndex }: ScoreListProps) {
             title={scoreItem.amount}
             currentIndex={currentIndex}
           />
-        );
+        )
       })}
     </section>
-  );
+  )
 }

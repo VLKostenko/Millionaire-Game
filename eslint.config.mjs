@@ -1,67 +1,67 @@
+// import { FlatCompat } from "@eslint/eslintrc";
 // import js from "@eslint/js";
-// import react from "eslint-plugin-react";
 // import airbnb from "eslint-config-airbnb";
-// import airbnbTypescript from "eslint-config-airbnb-typescript";
-// import tsParser from "@typescript-eslint/parser";
-// import tsEsLint from "@typescript-eslint/eslint-plugin";
+// import react from "eslint-plugin-react";
+// import reactHooks from "eslint-plugin-react-hooks";
 // import importPlugin from "eslint-plugin-import";
 // import jsxA11y from "eslint-plugin-jsx-a11y";
-// import reactHooks from "eslint-plugin-react-hooks";
-// import next from "@next/eslint-plugin-next";
+// import nextPlugin from "eslint-plugin-next";
+// import tsParser from "@typescript-eslint/parser";
+// import tsPlugin from "@typescript-eslint/eslint-plugin";
+// import path from "path";
+//
+// const compat = new FlatCompat({
+//   baseDirectory: import.meta.url,
+// });
 //
 // export default [
 //   js.configs.recommended,
+//   ...compat.extends("airbnb"),
+//   ...compat.extends("airbnb/hooks"),
 //   {
-//     files: ["**/*.ts", "**/*.tsx", "**/*.jsx", "**/*.js"],
+//     files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
 //     languageOptions: {
 //       parser: tsParser,
 //       parserOptions: {
-//         project: "./tsconfig.json",
+//         ecmaVersion: "latest",
+//         sourceType: "module",
+//         ecmaFeatures: {
+//           jsx: true,
+//         },
 //       },
 //     },
 //     plugins: {
 //       react,
 //       "react-hooks": reactHooks,
-//       "@typescript-eslint": tsEsLint,
 //       import: importPlugin,
 //       "jsx-a11y": jsxA11y,
-//       "@next/next": next,
+//       "@typescript-eslint": tsPlugin,
+//       next: nextPlugin,
 //     },
 //     rules: {
-//       ...airbnb.rules,
-//       ...airbnbTypescript.rules,
-//       ...react.configs.recommended.rules,
-//       ...importPlugin.configs.recommended.rules,
-//       ...jsxA11y.configs.recommended.rules,
-//
-//
-//       "react/react-in-jsx-scope": "off", // Next.js does not need React import
-//       "import/no-extraneous-dependencies": "off", // Sometimes too strict
-//       "react/jsx-props-no-spreading": "off", // Allow prop spreading
-//       "import/prefer-default-export": "off",
-//       "react/function-component-definition": "off",
-//       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
-//       "jsx-a11y/anchor-is-valid": "off"
+//       "semi": "off",
+//       "react/react-in-jsx-scope": "off",
+//       "react/jsx-filename-extension": ["error", { extensions: [".tsx", ".jsx"] }],
+//       "import/extensions": ["error", "ignorePackages", { tsx: "never", ts: "never", jsx: "never", js: "never" }],
+//       "react/prop-types": "off",
+//       "no-console": "warn",
+//       "no-unused-vars": "warn",
+//       "@typescript-eslint/no-unused-vars": "warn",
+//       "import/no-unresolved": "error",
+//     },
+//     settings: {
+//       react: {
+//         version: "detect",
+//       },
+//       "import/resolver": {
+//         node: {
+//           paths: ["."],
+//           extensions: [".js", ".jsx", ".ts", ".tsx"],
+//         },
+//         typescript: {
+//           project: path.resolve("tsconfig.json"), // Указываем путь к tsconfig.json
+//         },
+//       },
 //     },
 //   },
 // ];
-
-// import { dirname } from 'node:path';
-// import { fileURLToPath } from 'node:url';
-// import { FlatCompat } from '@eslint/eslintrc';
-//
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-//
-// const compat = new FlatCompat({
-//   baseDirectory: __dirname,
-// });
-//
-// const eslintConfig = [
-//   ...compat.config({
-//     extends: ['next/core-web-vitals', 'next/typescript', 'prettier'],
-//     rules: {},
-//   }),
-// ];
-//
-// export default eslintConfig;

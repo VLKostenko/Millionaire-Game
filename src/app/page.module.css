@@ -48,8 +48,11 @@
 }
 
 @media (max-width: 1024px) {
+  .home {
+    min-height: calc(90vh - 100px);
+  }
   .home__content {
-    min-height: 100vh;
+    min-height: calc(100vh - 50px);
     gap: var(--gap-large);
     flex-direction: column;
     justify-content: space-between;

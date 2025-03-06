@@ -1,15 +1,16 @@
-import styles from './page.module.css';
+import { Metadata } from 'next'
 
 // Components
-import BaseCtaButton from '@/app/components/base-cta-button/base-cta-button';
-import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
-import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
-import { Metadata } from 'next';
+import BaseCtaButton from '@/app/components/base-cta-button/base-cta-button'
+import WrappedImage from '@/app/components/wrapped-image/wrapped-image'
+import BaseParagraph from '@/app/components/base-paragraph/base-paragraph'
+
+import styles from './page.module.css'
 
 export const metadata: Metadata = {
   title: 'Millionaire Game - Home Page',
   description: 'Game who wants to be a millionaire',
-};
+}
 
 export default function Home() {
   return (
@@ -41,5 +42,5 @@ export default function Home() {
         </div>
       </div>
     </main>
-  );
+  )
 }

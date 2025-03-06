@@ -24,14 +24,14 @@
     },
     {
       "id": 3,
-      "question": "What is the capital of Canada?",
+      "question": "How many planets are in the Solar System?",
       "answers": {
-        "A": "Toronto",
-        "B": "Ottawa",
-        "C": "Vancouver",
-        "D": "Montreal"
+        "A": "8",
+        "B": "9",
+        "C": "Eight",
+        "D": "7"
       },
-      "correct": ["A", "B"]
+      "correct": ["A", "C"]
     },
     {
       "id": 4,
@@ -108,7 +108,7 @@
         "C": "Johannesburg",
         "D": "Durban"
       },
-      "correct": ["A", "B"]
+      "correct": "B"
     },
     {
       "id": 11,

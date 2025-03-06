@@ -1,0 +1,3 @@
+.base_cta_button {
+  composes: base_cta_button from '../../components/base-cta-button/base-cta-button.module.css';
+}

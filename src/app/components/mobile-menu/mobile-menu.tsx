@@ -1,22 +1,22 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { useState } from 'react';
-import styles from './mobile-menu.module.css';
+import React from 'react'
+import { useState } from 'react'
+import styles from './mobile-menu.module.css'
 
 // Components
-import ScoreList from '@/app/components/score-list/score-list';
+import ScoreList from '@/app/components/score-list/score-list'
 
 interface MobileMenuProps {
-  currentIndex: number;
+  currentIndex: number
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ currentIndex }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const toggleMenu = (): void => {
-    setIsOpen((prev) => !prev);
-  };
+    setIsOpen((prev) => !prev)
+  }
 
   return (
     <>
@@ -78,6 +78,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ currentIndex }) => {
         <ScoreList currentIndex={currentIndex} />
       </nav>
     </>
-  );
-};
-export default MobileMenu;
+  )
+}
+export default MobileMenu

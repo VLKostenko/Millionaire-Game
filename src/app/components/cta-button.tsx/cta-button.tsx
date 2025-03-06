@@ -1,12 +1,10 @@
-'use client';
-
-import React from 'react';
-import styles from '../base-cta-button/base-cta-button.module.css';
+import React from 'react'
+import styles from '../cta-button.tsx/cta.button.module.css'
 
 interface CtaButtonPrimaryProps {
-  children: React.ReactNode;
-  url?: string;
-  handleClick: () => void;
+  children: React.ReactNode
+  url?: string
+  handleClick: () => void
 }
 
 export default function CtaButton({
@@ -17,5 +15,5 @@ export default function CtaButton({
     <div onClick={handleClick} className={styles.base_cta_button}>
       {children}
     </div>
-  );
+  )
 }

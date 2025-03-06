@@ -1,8 +1,8 @@
 export interface ScoreItemProps {
-  id: number;
-  amount: string;
+  id: number
+  amount: string
 }
 
 export interface ScoreListProps {
-  currentIndex: number;
+  currentIndex: number
 }
