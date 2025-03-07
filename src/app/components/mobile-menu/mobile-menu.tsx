@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useState } from 'react';
 import styles from './mobile-menu.module.css';
 
@@ -14,9 +14,9 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ currentIndex }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleMenu = (): void => {
+  const toggleMenu = useCallback((): void => {
     setIsOpen(prev => !prev);
-  };
+  }, []);
 
   return (
     <>

@@ -83,7 +83,7 @@
 
 .text_correct::before,
 .text_correct::after {
-  background: var(--green-100);
+  background: var(--green-100) !important;
 }
 
 .text_wrong::before,
@@ -100,7 +100,7 @@
 .correct:focus,
 .correct::before,
 .correct::after {
-  border-color: var(--green-100);
+  border-color: var(--green-100) !important;
   background-color: var(--green-5);
 }
 
