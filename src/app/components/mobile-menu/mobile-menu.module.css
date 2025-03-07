@@ -34,3 +34,9 @@
   visibility: visible;
   transform: scale(1);
 }
+
+.nav_container {
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 100vw;
+}

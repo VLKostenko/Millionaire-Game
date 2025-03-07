@@ -75,7 +75,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ currentIndex }) => {
         )}
       </button>
       <nav className={`${styles.menu} ${isOpen ? styles.open : ''}`}>
-        <ScoreList currentIndex={currentIndex} />
+        <div className={styles.nav_container}>
+          <ScoreList currentIndex={currentIndex} />
+        </div>
       </nav>
     </>
   );
