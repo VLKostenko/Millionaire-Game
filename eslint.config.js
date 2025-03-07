@@ -55,6 +55,7 @@ export default [
       'react/jsx-curly-newline': 'off',
       'arrow-body-style': 'off',
       'no-nested-ternary': 'off',
+      'function-paren-newline': 'off',
       'import/no-duplicates': 'off',
       'react/no-array-index-key': 'off',
       'object-curly-newline': 'off',
