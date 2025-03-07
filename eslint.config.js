@@ -44,6 +44,7 @@ export default [
       'import/order': 'off',
       'comma-dangle': 'off',
       'no-else-return': 'off',
+      'arrow-parens': 'off',
       'import/no-extraneous-dependencies': 'off',
       'no-confusing-arrow': 'off',
       'prefer-destructuring': 'off',
