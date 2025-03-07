@@ -23,22 +23,31 @@ export default function GameCtaButton({
   const isSelected = state.selectedAnswers.includes(id);
   const isAnswered = state.isAnswered;
   const isCorrect = correctAnswers.includes(id);
+  const shouldShowCorrect = isAnswered && !isCorrect && isSelected; // If you chose the wrong option
 
   const buttonClass = `${styles.game_cta_button} ${
-    isAnswered && isSelected
+    isAnswered
       ? isCorrect
         ? styles.correct
-        : styles.wrong
+        : shouldShowCorrect
+          ? styles.wrong
+          : correctAnswers.includes(id)
+            ? styles.show_correct // Highlight the correct answer if the wrong one was chosen
+            : ''
       : isSelected
         ? styles.selected
         : ''
   }`;
 
   const textClass = `${styles.game_cta_button__text} ${
-    isAnswered && isSelected
+    isAnswered
       ? isCorrect
         ? styles.text_correct
-        : styles.text_wrong
+        : shouldShowCorrect
+          ? styles.text_wrong
+          : correctAnswers.includes(id)
+            ? styles.text_show_correct
+            : ''
       : isSelected
         ? styles.text_selected
         : ''
@@ -49,6 +58,7 @@ export default function GameCtaButton({
       type="button"
       className={buttonClass}
       onClick={() => onClick(symbol)}
+      disabled={isAnswered} // Block the button after response
     >
       {symbol && <span className={styles.game_cta_span}>{symbol}</span>}
       <p className={textClass}>{title}</p>
