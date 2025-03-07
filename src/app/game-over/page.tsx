@@ -1,31 +1,31 @@
-'use client'
+'use client';
 
-import React from 'react'
-import { useRouter } from 'next/navigation'
-import styles from './game-over.module.css'
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './game-over.module.css';
 
 // Components
-import WrappedImage from '@/app/components/wrapped-image/wrapped-image'
-import BaseParagraph from '@/app/components/base-paragraph/base-paragraph'
-import CtaButton from '@/app/components/cta-button.tsx/cta-button'
+import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
+import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
+import CtaButton from '@/app/components/cta-button/cta-button';
 
 // Context
-import { useFinalScore } from '@/app/context/FinalScoreContext'
+import { useFinalScore } from '@/app/context/FinalScoreContext';
 
 const GameOver: React.FC = () => {
-  const router = useRouter()
-  const { amount, setNewAmount } = useFinalScore()
+  const router = useRouter();
+  const { amount, setNewAmount } = useFinalScore();
 
   const handleRedirect = () => {
-    router.push('/')
+    router.push('/');
 
     const timerId = setTimeout(() => {
       // Set score to 0 for new game
-      setNewAmount('0')
-    }, 500)
+      setNewAmount('0');
+    }, 500);
 
-    return () => clearTimeout(timerId)
-  }
+    return () => clearTimeout(timerId);
+  };
 
   return (
     <main className={styles.game_over}>
@@ -58,7 +58,7 @@ const GameOver: React.FC = () => {
         </div>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default GameOver
+export default GameOver;
