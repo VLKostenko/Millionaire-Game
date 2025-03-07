@@ -46,9 +46,9 @@ export default function GameCtaButton({
   }`
 
   return (
-    <div className={buttonClass} onClick={() => onClick(symbol)}>
+    <button className={buttonClass} onClick={() => onClick(symbol)}>
       {symbol && <span className={styles.game_cta_span}>{symbol}</span>}
       <p className={textClass}>{title}</p>
-    </div>
+    </button>
   )
 }

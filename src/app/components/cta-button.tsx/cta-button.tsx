@@ -12,8 +12,8 @@ export default function CtaButton({
   handleClick,
 }: CtaButtonPrimaryProps) {
   return (
-    <div onClick={handleClick} className={styles.base_cta_button}>
+    <button onClick={handleClick} className={styles.base_cta_button}>
       {children}
-    </div>
+    </button>
   )
 }

@@ -97,6 +97,7 @@
 }
 
 .correct,
+.correct:focus,
 .correct::before,
 .correct::after {
   border-color: var(--green-100);
@@ -104,6 +105,7 @@
 }
 
 .selected,
+.selected:focus,
 .selected::before,
 .selected::after {
   border-color: var(--orange-100);
@@ -111,6 +113,7 @@
 }
 
 .wrong,
+.wrong:focus,
 .wrong::before,
 .wrong::after {
   border-color: var(--red-100);

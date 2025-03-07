@@ -21,7 +21,6 @@
   justify-content: center;
   min-height: 100vh;
   background-color: var(--bg-black-5);
-  /*font-family: var(--font-inter-sans);*/
 }
 
 .game_over__image_container {
@@ -50,7 +49,7 @@
 
 @media (max-width: 1024px) {
   .game_over__content {
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
     gap: var(--gap-large);
     flex-direction: column;
     justify-content: space-between;

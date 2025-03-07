@@ -25,7 +25,8 @@
     "@typescript-eslint/parser": "^8.26.0",
     "eslint": "^9.21.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "15.2.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-next": "^15.2.1",
     "eslint-config-prettier": "^10.0.2",
     "eslint-import-resolver-typescript": "^3.8.3",
     "eslint-plugin-import": "^2.31.0",
@@ -34,10 +35,12 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "globals": "^16.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
-    "prettier": "3.5.3",
-    "typescript": "^5"
+    "prettier": "^3.5.3",
+    "typescript": "^5",
+    "typescript-eslint": "^8.26.0"
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [

@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react'
 import styles from './score-list.module.css'
-import scoreData from '../../score.json'
+import scoreData from '@/app/data/score.json'
 
 // Components
 import ScoreItem from '@/app/components/score-item/score-item'

@@ -1,13 +1,12 @@
 'use client'
 
 import React, { useMemo } from 'react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useReducer } from 'react'
+import { useReducer } from 'react'
 import styles from '@/app/game/game.module.css'
 
 // Data
-import questions from '@/app/questions.json'
-import score from '@/app/score.json'
+import questions from '@/app/data/questions.json'
+import score from '@/app/data/score.json'
 
 // Components
 import GameCtaButton from '@/app/components/game-cta-button/game-cta-button'
@@ -16,18 +15,19 @@ import ScoreList from '@/app/components/score-list/score-list'
 
 // Hooks
 import useMediaQuery from '@/app/hooks/ui/useMediaQuery'
-import { useFinalScore } from '@/app/context/FinalScoreContext'
+import { useHandleAnswer } from '@/app/hooks/ui/useHandleAnswer'
+import { useHandleQuizCompleted } from '@/app/hooks/ui/useHandleQuizCompleted'
+
+// Modules
 import { quizReducer, initialState } from '@/app/modules/questions-reducer'
 
 // Interfaces
 import { QuizData, QuizQuestion, ScoreInterface } from '@/app/game/interfaces'
 
 export const quizData: QuizData = questions
-const scoreData: ScoreInterface[] = score
+export const scoreData: ScoreInterface[] = score
 
 const GameQuestions: React.FC = () => {
-  const { setNewAmount } = useFinalScore()
-  const router = useRouter()
   const isMobile = useMediaQuery('(max-width: 1024px)')
   const [state, dispatch] = useReducer(quizReducer, initialState)
 
@@ -50,43 +50,10 @@ const GameQuestions: React.FC = () => {
     correctAnswers.length === state.selectedAnswers.length
 
   // Check for another steps
-  useEffect(() => {
-    if (state.selectedAnswers.length === 0) return
-
-    const checkAnswerTimer = setTimeout(() => {
-      dispatch({ type: 'CHECK_ANSWER' })
-
-      const nextStepTimer = setTimeout(() => {
-        if (isCorrect) {
-          dispatch({ type: 'NEXT_QUESTION' })
-        } else {
-          router.push('/game-over')
-        }
-      }, 2000)
-
-      // Clean up the second timeout
-      return () => clearTimeout(nextStepTimer)
-    }, 2000)
-
-    // Clean up the first timeout
-    return () => clearTimeout(checkAnswerTimer)
-  }, [state.selectedAnswers, isCorrect, router])
+  useHandleAnswer({ state, dispatch, isCorrect })
 
   // After quiz completed redirect to Game Over page
-  useEffect(() => {
-    const lastScore = scoreData[0]
-
-    if (state.isQuizCompleted) {
-      const timeoutId = setTimeout(() => {
-        // we protect ourselves in case of winning
-        setNewAmount(lastScore.amount)
-        router.push('/game-over')
-      }, 2000)
-
-      // Cleanup timeout on component unmount or before rerunning effect
-      return () => clearTimeout(timeoutId)
-    }
-  }, [state.isQuizCompleted, router])
+  useHandleQuizCompleted({ state })
 
   return (
     <>
