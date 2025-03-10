@@ -5,12 +5,12 @@ import { useRouter } from 'next/navigation';
 import styles from './game-over.module.css';
 
 // Components
-import WrappedImage from '@/app/components/wrapped-image/wrapped-image';
-import BaseParagraph from '@/app/components/base-paragraph/base-paragraph';
-import CtaButton from '@/app/components/cta-button/cta-button';
+import WrappedImage from '@/components/wrapped-image/wrapped-image';
+import BaseParagraph from '@/components/base-paragraph/base-paragraph';
+import CtaButton from '@/components/cta-button/cta-button';
 
 // Context
-import { useFinalScore } from '@/app/context/FinalScoreContext';
+import { useFinalScore } from '@/context/FinalScoreContext';
 
 const GameOver: React.FC = () => {
   const router = useRouter();

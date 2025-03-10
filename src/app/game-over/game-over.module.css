@@ -1,17 +1,17 @@
 .extend_desktop {
-  composes: primary__h1 from '../components/base-paragraph/base-paragraph.module.css';
+  composes: primary__h1 from '../../components/base-paragraph/base-paragraph.module.css';
 }
 
 .extend_mobile {
-  composes: primary__h1_mobile from '../components/base-paragraph/base-paragraph.module.css';
+  composes: primary__h1_mobile from '../../components/base-paragraph/base-paragraph.module.css';
 }
 
 .extend_desktop__span {
-  composes: primary__span from '../components/base-paragraph/base-paragraph.module.css';
+  composes: primary__span from '../../components/base-paragraph/base-paragraph.module.css';
 }
 
 .extend_mobile__span {
-  composes: primary__span_mobile from '../components/base-paragraph/base-paragraph.module.css';
+  composes: primary__span_mobile from '../../components/base-paragraph/base-paragraph.module.css';
 }
 
 .game_over {

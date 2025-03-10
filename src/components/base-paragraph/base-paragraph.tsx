@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 interface ParagraphPrimaryProps {
-  title: string
-  spanTitle?: string
-  style: string
-  spanStyle?: string
+  title: string;
+  spanTitle?: string;
+  style: string;
+  spanStyle?: string;
 }
 
 export default function BaseParagraph({
@@ -18,5 +18,5 @@ export default function BaseParagraph({
       {spanTitle && <span className={spanStyle}>{spanTitle}</span>}
       <h1 className={style}>{title}</h1>
     </>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { quizData } from '@/app/components/game-questions/game-questions';
+import { quizData } from '@/components/game-questions/game-questions';
 import { QuizAction, QuizState } from '@/app/game/interfaces';
 
 export const initialState: QuizState = {

@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "eslint.config.js",
-    "src/app/components/cta-button"
+    "src/components/cta-button"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './style/globals.css'
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import '../style/globals.css';
 
 // Context Provider
-import { FinalScoreProvider } from '@/app/context/FinalScoreContext'
+import { FinalScoreProvider } from '@/context/FinalScoreContext';
 
 const inter = Inter({
   variable: '--font-inter-sans',
@@ -11,17 +11,17 @@ const inter = Inter({
   style: ['normal'],
   subsets: ['latin'],
   display: 'swap',
-})
+});
 
 export const metadata: Metadata = {
   title: 'Millionaire Game',
   description: 'Game who wants to be a millionaire',
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -29,5 +29,5 @@ export default function RootLayout({
         <FinalScoreProvider>{children}</FinalScoreProvider>
       </body>
     </html>
-  )
+  );
 }

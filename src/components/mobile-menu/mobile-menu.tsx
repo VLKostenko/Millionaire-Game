@@ -5,7 +5,7 @@ import { useState } from 'react';
 import styles from './mobile-menu.module.css';
 
 // Components
-import ScoreList from '@/app/components/score-list/score-list';
+import ScoreList from '@/components/score-list/score-list';
 
 interface MobileMenuProps {
   currentIndex: number;

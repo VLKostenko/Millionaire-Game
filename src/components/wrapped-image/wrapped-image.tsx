@@ -1,13 +1,13 @@
-import React from 'react'
-import Image from 'next/image'
-import styles from './wrapped-image.module.css'
+import React from 'react';
+import Image from 'next/image';
+import styles from './wrapped-image.module.css';
 
 interface WrappedImageProps {
-  src: string
-  alt: string
-  width?: number
-  height?: number
-  layout?: 'intrinsic' | 'responsive' | 'fixed' | 'fill'
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  layout?: 'intrinsic' | 'responsive' | 'fixed' | 'fill';
 }
 
 export default function WrappedImage({
@@ -29,5 +29,5 @@ export default function WrappedImage({
         priority
       />
     </div>
-  )
+  );
 }
