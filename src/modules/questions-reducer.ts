@@ -15,7 +15,18 @@ export const quizReducer = (
 ): QuizState => {
   switch (action.type) {
     case 'SELECT_ANSWER':
-      if (state.isAnswered) return state;
+      if (state.isAnswered) return state; // Blocking the choice after checking
+
+      const currentQuestion = quizData.questions[state.currentQuestionIndex];
+      const correctAnswers = Array.isArray(currentQuestion.correct)
+        ? currentQuestion.correct
+        : [currentQuestion.correct];
+
+      const maxSelectableAnswers = correctAnswers.length; // How many can you choose in this question
+
+      // If the user has already selected the same number of options as correct answers, we block
+      if (state.selectedAnswers.length >= maxSelectableAnswers) return state;
+
       return {
         ...state,
         selectedAnswers: state.selectedAnswers.includes(action.payload)
@@ -37,8 +48,8 @@ export const quizReducer = (
 
       return {
         ...state,
-        isAnswered: true,
-        correctAnswer: isCorrect ? null : correctAnswers,
+        isAnswered: true, // Fixed check
+        correctAnswer: isCorrect ? null : correctAnswers, // If there is an error, we save the correct answer
       };
     }
 

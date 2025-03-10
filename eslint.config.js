@@ -41,6 +41,9 @@ export default [
     rules: {
       semi: 'off',
       'no-undef': 'off',
+      'no-shadow': 'off',
+      'max-len': 'off',
+      'no-case-declarations': 'off',
       'import/order': 'off',
       'comma-dangle': 'off',
       'no-else-return': 'off',

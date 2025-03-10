@@ -25,6 +25,10 @@ export default function GameCtaButton({
   const isCorrect = correctAnswers.includes(id);
   const shouldShowCorrect = isAnswered && !isCorrect && isSelected; // If you chose the wrong option
 
+  const maxSelectableAnswers = correctAnswers.length; // How many can you choose in this question
+  const isSelectionLimitReached =
+    state.selectedAnswers.length >= maxSelectableAnswers;
+
   const buttonClass = `${styles.game_cta_button} ${
     isAnswered
       ? isCorrect
@@ -58,7 +62,7 @@ export default function GameCtaButton({
       type="button"
       className={buttonClass}
       onClick={() => onClick(symbol)}
-      disabled={isAnswered} // Block the button after response
+      disabled={isAnswered || isSelectionLimitReached} // Block the button after response
     >
       {symbol && <span className={styles.game_cta_span}>{symbol}</span>}
       <p className={textClass}>{title}</p>
