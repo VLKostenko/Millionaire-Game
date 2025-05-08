@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description: 'Game who wants to be a millionaire',
 };
 
+
 export default function Game() {
   return (
     <main className={styles.game}>

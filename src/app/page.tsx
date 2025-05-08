@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 
+
 // Components
 import BaseCtaButton from '@/components/base-cta-button/base-cta-button';
 import WrappedImage from '@/components/wrapped-image/wrapped-image';

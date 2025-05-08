@@ -21,7 +21,7 @@ import {
 
 const score: ScoreItemProps[] = scoreData;
 
-export default function ScoreList({ currentIndex }: ScoreListProps) {
+const ScoreList: React.FC<ScoreListProps> = React.memo(({ currentIndex }) => {
   const { setNewAmount } = useFinalScore();
 
   useEffect(() => {
@@ -43,4 +43,6 @@ export default function ScoreList({ currentIndex }: ScoreListProps) {
       })}
     </section>
   );
-}
+})
+
+export default ScoreList;

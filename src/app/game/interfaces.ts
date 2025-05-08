@@ -31,3 +31,4 @@ export type QuizAction =
   | { type: 'SELECT_ANSWER'; payload: string }
   | { type: 'CHECK_ANSWER' }
   | { type: 'NEXT_QUESTION' };
+
