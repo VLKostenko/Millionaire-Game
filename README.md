@@ -1,5 +1,7 @@
 ## Millionaire Game
 
+V.1.0
+
 ## Prerequisites
 
 - [Node](https://nodejs.org/en/) 20^ (if you cannot use the last node
