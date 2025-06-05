@@ -16,7 +16,7 @@ jobs:
         id: checklist
         run: |
           echo "items<<EOF" >> $GITHUB_OUTPUT
-          cat pr-checklist.txt >> $GITHUB_OUTPUT
+          cat .github/pr-checklist.txt >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Check PR body
