@@ -1,0 +1,7 @@
+name: "Выбери шаблон"
+description: "Шаблоны PR для разных задач"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        👉 Выбери подходящий шаблон PR справа, например: dev-checklist
