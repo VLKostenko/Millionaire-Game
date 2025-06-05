@@ -1,4 +1,3 @@
-# .github/workflows/dev-pr-checklist.yml
 name: Enforce PR Checklist for Dev
 
 on:
@@ -10,21 +9,20 @@ jobs:
   checklist:
     runs-on: ubuntu-latest
     steps:
-      - name: Check PR body
+      - name: Check PR body for checklist
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const body = context.payload.pull_request.body || ""
+            const body = context.payload.pull_request.body || "";
             const required = [
               "Проверил фичу локально",
-              "Удалил `console.log`",
-              "Код соответствует стандартам проекта",
+              "Нет ошибок и предупреждений в консоли",
+              "Удалил `console.log`, `debugger`, временные заглушки",
+              "Код соответствует стандартам проекта (ESLint, Prettier)",
               "Описание задачи"
             ];
-
             const missing = required.filter(item => !body.includes(item));
-
             if (missing.length > 0) {
-              core.setFailed(`PR checklist is missing required items:\n${missing.join("\n")}`);
+              core.setFailed("❌ PR checklist is missing required items:\\n" + missing.join("\\n"));
             }
