@@ -24,6 +24,12 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const isDraft = context.payload.pull_request.draft;
+            if (isDraft) {
+              core.info("📝 PR is in draft — skipping checklist validation");
+              return;
+            }
+
             const body = context.payload.pull_request.body || "";
             const checklistRaw = `${{ steps.checklist.outputs.items }}`;
             const requiredItems = checklistRaw
@@ -32,7 +38,7 @@ jobs:
               .filter(line => line.startsWith("- [ ]") || line.startsWith("- [x]"));
 
             const uncheckedItems = requiredItems.filter(item => {
-              const itemText = item.replace("- [ ]", "").trim();
+              const itemText = item.replace(/- \[.\]/, "").trim();
               const regex = new RegExp(`- \\[x\\]\\s*${itemText}`, "i");
               return !regex.test(body);
             });
