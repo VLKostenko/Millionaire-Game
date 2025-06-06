@@ -7,7 +7,7 @@ import { FinalScoreProvider } from '@/context/FinalScoreContext';
 
 const inter = Inter({
   variable: '--font-inter-sans',
-  weight: ['400', '600'],
+  weight: ['400', '600', '800'],
   style: ['normal'],
   subsets: ['latin'],
   display: 'swap',
