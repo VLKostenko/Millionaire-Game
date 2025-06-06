@@ -1,7 +1,0 @@
-name: Выберите шаблон PR
-description: Используйте подходящий шаблон ниже
-pull_request_templates:
-  - name: Dev Checklist
-    path: .github/PULL_REQUEST_TEMPLATE/dev-checklist.md
-  - name: Feature Checklist
-    path: .github/PULL_REQUEST_TEMPLATE/feature-checklist.md
