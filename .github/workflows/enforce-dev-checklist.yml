@@ -38,7 +38,7 @@ jobs:
               .filter(line => line.startsWith("- [ ]") || line.startsWith("- [x]"));
 
             const uncheckedItems = requiredItems.filter(item => {
-              const itemText = item.replace(/- \[.\]/, "").trim();
+              const itemText = item.replace(/- \[[ xX]\]/, "").trim();
               const regex = new RegExp(`- \\[x\\]\\s*${itemText}`, "i");
               return !regex.test(body);
             });
