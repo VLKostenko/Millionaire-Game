@@ -34,16 +34,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Json data based
 
-money rewards
-
 ```
-src/app - score.jon
-```
-
-questions & answers
-
-```
-src/app - questions.jon
+src/app/data
 ```
 
 ## Styles directory
@@ -57,7 +49,3 @@ src/app/styles/global.css
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Game Flow here
-
-![game-flow.excalidraw.png](..%2F..%2F..%2FDesktop%2Fgame-flow.excalidraw.png)
