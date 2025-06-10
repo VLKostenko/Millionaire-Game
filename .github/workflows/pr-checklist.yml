@@ -1,0 +1,44 @@
+name: Inject PR Checklist for Development
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  inject-checklist:
+    if: github.event.pull_request.base.ref == 'development'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Read checklist template
+        id: read_template
+        run: |
+          content=$(cat .github/pull_request_template.md | sed ':a;N;$!ba;s/\n/\\n/g')
+          echo "template=$content" >> $GITHUB_OUTPUT
+
+      - name: Check if checklist is already present
+        id: check_existing
+        run: |
+          body="$(gh pr view ${{ github.event.pull_request.number }} --json body -q .body)"
+          if [[ "$body" == *"Чеклист перед созданием PR"* ]]; then
+            echo "Checklist already present."
+            echo "skip=true" >> $GITHUB_OUTPUT
+          else
+            echo "Checklist missing."
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Append checklist to PR body
+        if: steps.check_existing.outputs.skip == 'false'
+        run: |
+          pr_number="${{ github.event.pull_request.number }}"
+          old_body="$(gh pr view $pr_number --json body -q .body)"
+          new_body="$old_body\n\n${{ steps.read_template.outputs.template }}"
+          gh pr edit $pr_number --body "$new_body"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
