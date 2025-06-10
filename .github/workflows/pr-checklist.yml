@@ -1,4 +1,4 @@
-name: Inject PR Checklist for Development
+name: Inject PR Checklist for Dev
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   inject-checklist:
-    if: github.event.pull_request.base.ref == 'development'
+    if: github.event.pull_request.base.ref == 'dev'
     runs-on: ubuntu-latest
 
     steps:
