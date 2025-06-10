@@ -2,12 +2,12 @@ name: Validate PR Checklist
 
 on:
   pull_request:
-    types: [opened, synchronize]
-  workflow_dispatch:
+    branches: [development]
+    types: [opened, synchronize, edited]
+  workflow_dispatch: # ← позволяет вручную запускать workflow из UI
 
 jobs:
   validate-checklist:
-    if: github.event.pull_request.base.ref == 'development'
     runs-on: ubuntu-latest
 
     steps:
