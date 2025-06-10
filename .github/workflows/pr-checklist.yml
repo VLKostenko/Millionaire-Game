@@ -2,24 +2,25 @@ name: Validate PR Checklist
 
 on:
   pull_request:
-    types: [opened, edited, synchronize]
+    types: [opened, synchronize]
+  workflow_dispatch:
 
 jobs:
   validate-checklist:
-    if: github.event.pull_request.base.ref == 'dev'
+    if: github.event.pull_request.base.ref == 'development'
     runs-on: ubuntu-latest
 
     steps:
-      - name: Read PR body
-        id: read_body
+      - name: Dump PR body
+        id: dump_body
         run: |
           echo "BODY<<EOF" >> $GITHUB_OUTPUT
           echo "${{ github.event.pull_request.body }}" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
 
-      - name: Check for checklist
+      - name: Check for checklist marker
         run: |
-          echo "🔍 Checking PR body for checklist marker..."
-          echo "${{ steps.read_body.outputs.BODY }}" | grep -q "Чеклист перед созданием PR" \
+          echo "🔍 Checking PR body for checklist..."
+          echo "${{ steps.dump_body.outputs.BODY }}" | grep -q "Чеклист перед созданием PR" \
             && echo "✅ Checklist found." \
-            || (echo "❌ Checklist not found. Please include the required PR checklist." && exit 1)
+            || (echo "❌ Checklist not found. Please add the required checklist to the PR description." && exit 1)
