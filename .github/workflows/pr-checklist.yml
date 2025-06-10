@@ -1,4 +1,4 @@
-name: Inject PR Checklist for Dev
+name: Inject PR Checklist into PR Body
 
 on:
   pull_request:
@@ -13,32 +13,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Read checklist template
-        id: read_template
-        run: |
-          content=$(cat .github/pull_request_template.md | sed ':a;N;$!ba;s/\n/\\n/g')
-          echo "template=$content" >> $GITHUB_OUTPUT
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh -y
 
-      - name: Check if checklist is already present
-        id: check_existing
+      - name: Read PR body
+        id: get_body
         run: |
-          body="$(gh pr view ${{ github.event.pull_request.number }} --json body -q .body)"
-          if [[ "$body" == *"Чеклист перед созданием PR"* ]]; then
-            echo "Checklist already present."
-            echo "skip=true" >> $GITHUB_OUTPUT
-          else
-            echo "Checklist missing."
-            echo "skip=false" >> $GITHUB_OUTPUT
-          fi
+          body=$(gh pr view ${{ github.event.pull_request.number }} --json body -q .body)
+          echo "body<<EOF" >> $GITHUB_OUTPUT
+          echo "$body" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Append checklist to PR body
-        if: steps.check_existing.outputs.skip == 'false'
+      - name: Check if checklist already exists
+        id: check
+        run: |
+          echo "Checklist found: false" >> $GITHUB_STEP_SUMMARY
+          echo "found=false" >> $GITHUB_OUTPUT
+          if echo "${{ steps.get_body.outputs.body }}" | grep -q "Чеклист перед созданием PR"; then
+            echo "Checklist found: true" >> $GITHUB_STEP_SUMMARY
+            echo "found=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Append checklist to PR
+        if: steps.check.outputs.found == 'false'
         run: |
           pr_number="${{ github.event.pull_request.number }}"
-          old_body="$(gh pr view $pr_number --json body -q .body)"
-          new_body="$old_body\n\n${{ steps.read_template.outputs.template }}"
-          gh pr edit $pr_number --body "$new_body"
+          old_body="${{ steps.get_body.outputs.body }}"
+          echo -e "$old_body\n\n$(cat .github/pull_request_template.md)" > full_body.md
+          gh pr edit "$pr_number" --body-file full_body.md
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
