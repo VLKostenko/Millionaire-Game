@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- [Node](https://nodejs.org/en/) 20^ (if you cannot use the last node
+- [Node](https://nodejs.org/en/) 20^ (if you cannot use the last node.)
   this can be done through [NVM](https://github.com/nvm-sh/nvm))
 - [React](https://reactjs.org/) 19.0.0
 - [Next](https://reactjs.org/) 15^
